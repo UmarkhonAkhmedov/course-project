@@ -1,0 +1,15 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = "mongodb+srv://umar009:qwerty12345@cluster0.ppwyrue.mongodb.net/?retryWrites=true&w=majority"
+}
+
+model Post {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  body String
+}
