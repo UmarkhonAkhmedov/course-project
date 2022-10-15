@@ -1,0 +1,47 @@
+async function main() {
+  // const allUsers = await prisma.user.findMany();
+  // console.log(allUsers);
+  // const results = await prisma.user.create({
+  //   data: {
+  //     email: "abc@gmail.com",
+  //     name: "Abc",
+  //   },
+  // });
+  // console.log(results);
+  // const results = await prisma.user.update({
+  //   where: {
+  //     email: "abc@gmail.com",
+  //   },
+  //   data: {
+  //     name: "Xyz",
+  //   },
+  // });
+  // console.log(results);
+  // const results = await prisma.post.create({
+  //   data: {
+  //     title: "Hello World",
+  //     content: "Life is more beautiful than expected",
+  //   },
+  // });
+  // const results = await prisma.post.update({
+  //   where: {
+  //     id: "6349fb8c42a60c309c8fa4fe",
+  //   },
+  //   data: {
+  //     author: {
+  //       connect: {
+  //         email: "umar@gmail.com",
+  //       },
+  //     },
+  //   },
+  // });
+  // console.log(results);
+}
+
+main()
+  .catch((e) => {
+    throw e;
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });

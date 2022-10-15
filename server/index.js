@@ -1,29 +1,18 @@
 import express from "express";
 import cors from "cors";
-import connection from "./db/connect.js";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
-
-async function main() {
-  const post = await prisma.post.create({
-    data: {
-      title: "My First post",
-      body: "My first post body",
-    },
-  });
-  console.log(post);
-}
-main();
-connection();
+import userRoutes from "./routes/routes.users.js";
+import itemRoutes from "./routes/routes.items.js";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
-// app.use("/api/users", userRoutes);
+app.use("/users", userRoutes);
+app.use("/items", itemRoutes);
 
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, () => console.log(`Listening on port: 8080`));
+app.listen(PORT, () => console.log(`Listening on port: 8000`));
