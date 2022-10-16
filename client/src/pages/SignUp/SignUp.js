@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import "./signup.css";
 import InputField from "../../components/Form/InputField";
+import { Box, Button, Typography } from "@mui/material";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -36,43 +37,50 @@ const Signup = () => {
   };
 
   return (
-    <div className="container">
-      <div className="signup_form_container">
-        <div className="left">
-          <form className="form_container" onSubmit={handleSubmit}>
-            <h1>Create Your Account</h1>
-            <InputField
-              name="name"
-              label="Name"
-              handleChange={handleChange}
-              value={data.name}
-            />
-            <InputField
-              name="email"
-              label="Email"
-              handleChange={handleChange}
-              value={data.email}
-            />
-            <InputField
-              name="password"
-              label="Password"
-              handleChange={handleChange}
-              value={data.password}
-            />
-            {error && <div className="error_msg">{error}</div>}
-            <button type="submit" className="green_btn">
-              Sing Up
-            </button>
-          </form>
-          <div className="right">
-            <h5>Already, have account?</h5>
-            <Link to="/login">
-              <button type="button" className="white_btn">
-                Sing in
-              </button>
-            </Link>
-          </div>
-        </div>
+    <div className="signup">
+      <div className="container">
+        <form className="form_container" onSubmit={handleSubmit}>
+          <Typography variant="h4" color="primary" fontWeight={600} mb={5}>
+            Create Your Account
+          </Typography>
+          <InputField
+            name="name"
+            label="Name"
+            handleChange={handleChange}
+            value={data.name}
+          />
+          <InputField
+            name="email"
+            label="Email"
+            handleChange={handleChange}
+            value={data.email}
+          />
+          <InputField
+            name="password"
+            label="Password"
+            handleChange={handleChange}
+            value={data.password}
+          />
+          {error && <div className="error_msg">{error}</div>}
+          <Button
+            variant="contained"
+            size="medium"
+            type="submit"
+            className="btn__submit"
+          >
+            Sing Up
+          </Button>
+        </form>
+        <Box className="register__link">
+          <Typography variant="h6" sx={{ fontSize: "18px" }}>
+            Already, have account?
+          </Typography>
+          <Link to="/login">
+            <Button size="medium" sx={{ fontWeight: 700, fontSize: "15px" }}>
+              Sing in
+            </Button>
+          </Link>
+        </Box>
       </div>
     </div>
   );
