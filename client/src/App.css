@@ -18,8 +18,8 @@
   align-items: center;
 }
 
-@media screen and (max-width: 500px) {
-  .paddingForm {
-    padding: 10px 15px;
+@media screen and (max-width: 1024px) {
+  .container {
+    padding: 0 30px;
   }
 }
