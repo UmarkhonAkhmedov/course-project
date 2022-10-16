@@ -5,6 +5,8 @@ import Home from "./pages/Home/Home";
 import { Route, Routes } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import Login from "./pages/Login/Login";
+import Signup from "./pages/SignUp/SignUp";
 
 function App() {
   const [darkMode, setDarkMode] = useState(
@@ -27,6 +29,8 @@ function App() {
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
       </ThemeProvider>
     </Suspense>

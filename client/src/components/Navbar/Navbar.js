@@ -2,7 +2,7 @@ import React from "react";
 import LanguageToggler from "../Localization/LanguageToggler";
 import { Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
-import "../../styles/navbar.css";
+import "./navbar.css";
 import DarkMode from "../DarkMode/DarkMode";
 
 function Navbar({ darkMode, setDarkMode }) {
@@ -29,10 +29,10 @@ function Navbar({ darkMode, setDarkMode }) {
           </ul>
           <Box className="nav__items">
             <Button variant="outlined" size="small">
-              <Link to="create">Create Question</Link>
+              <Link to="login">Login</Link>
             </Button>
             <Button sx={{ margin: "0 10px" }} variant="contained" size="small">
-              <Link to="login">Login</Link>
+              <Link to="signup">Sign Up</Link>
             </Button>
             <Box className="nav__items--lan">
               <LanguageToggler />
