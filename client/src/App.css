@@ -5,27 +5,6 @@
   padding: 0 50px;
 }
 
-.lan__select {
-  border: none;
-  font-size: 18px;
-  outline: none;
-  padding: 0px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  padding: 0 10px;
-}
-
-.lan__select:hover {
-  color: #01d986;
-}
-
-.lan__select option {
-  font-size: 16px;
-}
-
 .btn__submit {
   margin: 30px 0 20px 0 !important;
   padding: 10px 60px !important;

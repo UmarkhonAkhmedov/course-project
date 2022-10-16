@@ -1,17 +1,21 @@
 import React from "react";
 import LanguageToggler from "../Localization/LanguageToggler";
-import { Box, Button } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 import DarkMode from "../DarkMode/DarkMode";
 
 function Navbar({ darkMode, setDarkMode }) {
   return (
-    <Box className="navbar">
+    <Paper className="navbar" elevation={5}>
       <Box className="container">
         <Box className="nav">
-          <Box className="nav__logo">
-            <Link to="/">Collects</Link>
+          <Box>
+            <Link to="/">
+              <Typography className="nav__logo" variant="h5" color="primary">
+                MyCollects
+              </Typography>
+            </Link>
           </Box>
           <ul className="nav__list">
             <li>
@@ -28,20 +32,21 @@ function Navbar({ darkMode, setDarkMode }) {
             </li>
           </ul>
           <Box className="nav__items">
-            <Button variant="outlined" size="small">
+            <Button
+              sx={{ padding: "7px 25px", margin: "0 40px 0 10px" }}
+              variant="contained"
+              size="small"
+            >
               <Link to="login">Login</Link>
             </Button>
-            <Button sx={{ margin: "0 10px" }} variant="contained" size="small">
-              <Link to="signup">Sign Up</Link>
-            </Button>
+            <DarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
             <Box className="nav__items--lan">
               <LanguageToggler />
             </Box>
-            <DarkMode darkMode={darkMode} setDarkMode={setDarkMode} />
           </Box>
         </Box>
       </Box>
-    </Box>
+    </Paper>
   );
 }
 
