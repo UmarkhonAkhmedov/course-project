@@ -1,17 +1,34 @@
 import "./App.css";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
-import { useTranslation } from "react-i18next";
+import Home from "./pages/Home/Home";
+import { Route, Routes } from "react-router-dom";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 function App() {
-  const { t } = useTranslation(["Home"]);
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("dark-mode") === "true"
+  );
+  const darkTheme = createTheme({
+    palette: {
+      mode: darkMode ? "dark" : "light",
+    },
+  });
+
+  useEffect(() => {
+    localStorage.setItem("dark-mode", String(darkMode));
+  }, [darkMode]);
 
   return (
     <Suspense fallback={null}>
-      <div className="App">
-        <Navbar />
-        <button className="button">{t("done")}</button>
-      </div>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </ThemeProvider>
     </Suspense>
   );
 }

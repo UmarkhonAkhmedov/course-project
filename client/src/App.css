@@ -1,0 +1,33 @@
+.container {
+  position: relative;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+.lan__select {
+  border: none;
+  font-size: 18px;
+  outline: none;
+  padding: 0px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0 10px;
+}
+
+.lan__select:hover {
+  color: #01d986;
+}
+
+.lan__select option {
+  font-size: 16px;
+}
+
+@media screen and (max-width: 500px) {
+  .paddingForm {
+    padding: 10px 15px;
+  }
+}
