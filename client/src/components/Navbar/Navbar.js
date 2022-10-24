@@ -6,6 +6,11 @@ import "./navbar.css";
 import DarkMode from "../DarkMode/DarkMode";
 
 function Navbar({ darkMode, setDarkMode }) {
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
     <Paper className="navbar" elevation={5}>
       <Box className="container">
@@ -33,6 +38,7 @@ function Navbar({ darkMode, setDarkMode }) {
               sx={{ padding: "7px 25px", margin: "0 40px 0 10px" }}
               variant="contained"
               size="small"
+              onClick={handleLogout}
             >
               <Link to="login">Login</Link>
             </Button>

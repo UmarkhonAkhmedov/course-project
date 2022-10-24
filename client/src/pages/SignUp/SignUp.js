@@ -39,9 +39,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="signup">
+    <div className="login__container">
       <div className="container">
-        <form className="form_container" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
           <Typography variant="h4" color="primary" fontWeight={600} mb={5}>
             Create Your Account
           </Typography>

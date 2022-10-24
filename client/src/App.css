@@ -18,6 +18,27 @@
   align-items: center;
 }
 
+.error_msg {
+  max-width: 600px;
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0;
+  font-size: 14px;
+  background-color: #f34646;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.login__container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 100px auto;
+  max-width: 600px;
+  width: 90%;
+}
+
 @media screen and (max-width: 1024px) {
   .container {
     padding: 0 30px;

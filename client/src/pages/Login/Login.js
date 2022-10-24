@@ -17,7 +17,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "https:localhost:8000/users";
+      const url = "http://localhost:8000/users/login";
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
       localStorage.setItem("email", data.email);
@@ -34,7 +34,7 @@ function Login() {
   };
 
   return (
-    <div className="login">
+    <div className="login__container">
       <div className="container">
         <form onSubmit={handleSubmit}>
           <Typography variant="h4" color="primary" fontWeight={600} mb={5}>
