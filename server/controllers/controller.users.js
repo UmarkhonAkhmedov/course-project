@@ -1,6 +1,7 @@
 import express from "express";
 import { PrismaClient } from "@prisma/client";
 import getJwtToken from "../utils/jwt";
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -15,14 +16,16 @@ export const getAllUsers = async (req, res) => {
 };
 
 export const createUser = async (req, res) => {
-  const { name, email, password } = req.body;
-
   try {
+    const { name, email, password } = req.body;
+    const salt = await bcrypt.genSalt(Number(process.env.BCRYPT__NUMBER));
+    const hashPassword = await bcrypt.hash(password, salt);
+
     const result = await prisma.user.create({
       data: {
         email,
         name,
-        password,
+        password: hashPassword,
       },
     });
 
@@ -43,10 +46,10 @@ export const getUser = async (req, res) => {
     if (!result)
       return res.status(401).send({ message: "Invalid Email or Password" });
 
-    let validPassword = false;
-    if (req.body.password === result.password) {
-      validPassword = true;
-    }
+    const validPassword = await bcrypt.compare(
+      req.body.password,
+      result.password
+    );
 
     if (!validPassword)
       return res.status(401).send({ message: "Invalid Email or Password" });
@@ -56,6 +59,7 @@ export const getUser = async (req, res) => {
     res.status(200).send({ data: token, message: "logged in successfully" });
   } catch (error) {
     console.log("This is error");
+    console.log(error);
     res.status(500).send({ message: "Internal Server Error" });
   }
 };
