@@ -26,11 +26,12 @@ export const createUser = async (req, res) => {
       },
     });
 
-    cookieToken(result, res);
+    // cookieToken(result, res);
 
-    res.status(201).json(result);
+    res.status(201).send({ message: "User created successfully" });
   } catch (error) {
-    res.status(409).json({ message: error.message });
+    console.log("This is errot");
+    res.status(409).send({ message: "User with given email already Exist!" });
   }
 };
 

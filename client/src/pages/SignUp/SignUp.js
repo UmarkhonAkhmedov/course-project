@@ -20,12 +20,14 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(e);
     try {
-      const url = "https://au-user-app.herokuapp.com/api/users";
+      const url = "http://localhost:8000/users/signup";
       const { data: res } = await axios.post(url, data);
       navigate("/login");
-      console.log(res.message);
+      console.log(data);
     } catch (error) {
+      console.log(error.response);
       if (
         error.response &&
         error.response.status >= 400 &&

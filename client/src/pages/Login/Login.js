@@ -17,7 +17,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "https://au-user-app.herokuapp.com/api/auth";
+      const url = "https:localhost:8000/users";
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
       localStorage.setItem("email", data.email);
