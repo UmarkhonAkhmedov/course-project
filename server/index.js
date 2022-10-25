@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import userRoutes from "./routes/routes.users.js";
+import collectionsRoutes from "./routes/routes.collections.js";
 import itemRoutes from "./routes/routes.items.js";
 import cookieParser from "cookie-parser";
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(cookieParser());
 
 app.use("/users", userRoutes);
+app.use("/collections", collectionsRoutes);
 app.use("/items", itemRoutes);
 
 const PORT = process.env.PORT || 8000;

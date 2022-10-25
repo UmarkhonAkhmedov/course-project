@@ -12,7 +12,18 @@ model User {
   name String
   email String @unique
   password String
-  posts Item[]
+  collections Collection[]
+}
+
+model Collection {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  name String @unique
+  description String
+  topic String
+  authorEmail String?
+  author User? @relation(fields: [authorEmail], references: [email])
+  items Item[]
 }
 
 model Item {
@@ -21,9 +32,10 @@ model Item {
   updatedAt DateTime @updatedAt
   name String
   tags Json
+  img String
   viewContent Int @default(0)
-  authorId String?
-  author User? @relation(fields: [authorId], references: [id])
+  collectionsId String?
+  collections Collection? @relation(fields: [collectionsId], references: [id])
 }
 
 
