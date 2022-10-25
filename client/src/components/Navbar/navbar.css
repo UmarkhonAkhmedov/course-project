@@ -41,3 +41,32 @@
 .nav__items--lan {
   margin-left: -10px;
 }
+
+.user {
+  position: relative;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.userDetails {
+  left: -150%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: absolute;
+  width: 150px;
+  margin: 10px 0 0 0;
+  padding: 10px 20px;
+}
+
+.avatar__item {
+  font-size: 15px;
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+.avatar__item:hover {
+  opacity: 0.7;
+  cursor: pointer;
+}
