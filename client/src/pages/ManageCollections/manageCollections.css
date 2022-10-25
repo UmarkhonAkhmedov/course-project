@@ -9,10 +9,23 @@
 }
 
 .manageCollects__main {
-  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 5px;
+}
+.manageCollects__list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0px;
 }
 .manageCollects__main--item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.collection__icons {
+  width: 40px;
+  height: 40px;
 }

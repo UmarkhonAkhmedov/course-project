@@ -31,4 +31,19 @@ export const createCollection = async (req, res) => {
   }
 };
 
+export const deleteCollection = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await prisma.collection.delete({
+      where: {
+        id: id,
+      },
+    });
+    res.json({ message: "User deleted successfully." });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export default router;
