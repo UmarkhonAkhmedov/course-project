@@ -49,6 +49,7 @@
 }
 
 .userDetails {
+  z-index: 100;
   left: -150%;
   display: flex;
   align-items: center;
