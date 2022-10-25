@@ -46,4 +46,25 @@ export const deleteCollection = async (req, res) => {
   }
 };
 
+export const updateCollection = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, description, topic, authorEmail } = req.body;
+
+    const result = await prisma.collection.update({
+      data: {
+        name,
+        description,
+        topic,
+      },
+      where: {
+        id: id,
+      },
+    });
+    res.json({ message: "User deleted successfully." });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export default router;
