@@ -31,8 +31,8 @@ model Item {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name String
-  tags Json
-  img String
+  tags Json[]
+  img String?
   viewContent Int @default(0)
   collectionsId String?
   collections Collection? @relation(fields: [collectionsId], references: [id])

@@ -14,6 +14,7 @@ import ModalCollections from "../../components/ModalCollections/ModalCollections
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import InputField from "../../components/Form/InputField";
+import { Link } from "react-router-dom";
 
 function ManageCollections() {
   const [data, setData] = useState([]);
@@ -90,7 +91,16 @@ function ManageCollections() {
                         <h4>Name: {item.name}</h4>
                         <h4>Topic: {item.topic}</h4>
                         <h4>Description: {item.description}</h4>
-                        <h4>Number of Items: 0</h4>
+                        <Link
+                          to={{
+                            pathname: `/manage/${item.id}`,
+                            state: item.id,
+                          }}
+                        >
+                          <Button variant="outlined" sx={{ marginTop: "10px" }}>
+                            See All Items
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                     <div>

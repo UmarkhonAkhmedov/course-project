@@ -8,6 +8,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/SignUp";
 import ManageCollections from "./pages/ManageCollections/ManageCollections";
+import ManageItems from "./pages/ManageItems/ManageItems";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -31,11 +32,10 @@ function App() {
         <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* {user && <Route path="/" element={<Home />} />} */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/manage" element={<ManageCollections />} />
-          {/* <Route path="/" element={<Navigate replace to="/login" />} /> */}
+          <Route path="/manage/:id" element={<ManageItems />} />
         </Routes>
       </ThemeProvider>
     </Suspense>
