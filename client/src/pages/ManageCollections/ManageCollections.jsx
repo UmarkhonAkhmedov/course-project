@@ -66,8 +66,6 @@ function ManageCollections() {
     setUpdate({ ...update, [input.name]: input.value });
   };
 
-  // console.log(update);
-
   return (
     <Box>
       <div className="container">
