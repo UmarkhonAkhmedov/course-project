@@ -31,7 +31,7 @@ export default function ModalCollections({ fetching, setFetching }) {
     name: "",
     topic: "",
     description: "",
-    authorId: getEmail,
+    authorEmail: getEmail,
   });
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -53,7 +53,7 @@ export default function ModalCollections({ fetching, setFetching }) {
         name: "",
         topic: "",
         description: "",
-        authorId: getEmail,
+        authorEmail: getEmail,
       });
       setError("");
     } catch (error) {
