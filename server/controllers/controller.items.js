@@ -14,20 +14,49 @@ export const getAllItems = async (req, res) => {
 };
 
 export const createItem = async (req, res) => {
-  const { name, tags, authorEmail } = req.body;
+  const {
+    name,
+    tags,
+    collectionsId,
+    integerField,
+    stringField,
+    multilineField,
+    checkboxesField,
+    dateField,
+  } = req.body;
 
   try {
     const result = await prisma.item.create({
       data: {
         name,
         tags,
-        author: { connect: { email: authorEmail } },
+        collectionsId,
+        integerField,
+        stringField,
+        multilineField,
+        checkboxesField,
+        dateField,
       },
     });
     res.status(201).json(result);
   } catch (error) {
     console.log(error);
     res.status(409).json({ message: error.message });
+  }
+};
+
+export const deleteItem = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await prisma.item.delete({
+      where: {
+        id: id,
+      },
+    });
+    res.json({ message: "User deleted successfully." });
+  } catch (error) {
+    console.log(error);
   }
 };
 
