@@ -1,4 +1,4 @@
-import { Box, Checkbox, FormControlLabel, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import React from "react";
 
 function ManyFields({ name, num, type, items, setItems }) {

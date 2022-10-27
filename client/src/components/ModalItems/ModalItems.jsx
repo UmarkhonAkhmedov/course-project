@@ -5,7 +5,6 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import InputField from "../Form/InputField";
-import { FormHelperText, TextField } from "@mui/material";
 import { useParams } from "react-router-dom";
 import ButtonIncrement from "./ButtonIncrement";
 import ManyFields from "./ManyFields";
@@ -72,8 +71,6 @@ export default function ModalItems({ fetching, setFetching }) {
       console.log("Failded", error);
     }
   };
-
-  console.log(items);
 
   return (
     <div>
