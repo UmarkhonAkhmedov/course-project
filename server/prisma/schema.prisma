@@ -22,6 +22,7 @@ model Collection {
   description String
   topic String
   authorEmail String?
+  img String?
   author User? @relation(fields: [authorEmail], references: [email])
   items Item[]
 }
@@ -31,10 +32,14 @@ model Item {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   name String
-  tags Json[]
-  img String?
+  tags String
   viewContent Int @default(0)
   collectionsId String?
+  integerField Json?
+  stringField Json?
+  multilineField Json?
+  checkboxesField Json?
+  dateField Json?
   collections Collection? @relation(fields: [collectionsId], references: [id])
 }
 
