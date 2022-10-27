@@ -60,6 +60,40 @@ export const deleteItem = async (req, res) => {
   }
 };
 
+export const updateItem = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {
+      name,
+      tags,
+      collectionsId,
+      integerField,
+      stringField,
+      multilineField,
+      checkboxesField,
+      dateField,
+    } = req.body;
+
+    const result = await prisma.item.update({
+      data: {
+        name,
+        tags,
+        collectionsId,
+        integerField,
+        stringField,
+        multilineField,
+        checkboxesField,
+        dateField,
+      },
+      where: {
+        id: id,
+      },
+    });
+    res.json({ message: "User deleted successfully." });
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const likeItem = async (req, res) => {
   const { id } = req.params;
 
