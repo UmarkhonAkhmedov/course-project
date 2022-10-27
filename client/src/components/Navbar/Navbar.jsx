@@ -8,10 +8,12 @@ import { deepOrange } from "@mui/material/colors";
 
 function Navbar({ darkMode, setDarkMode }) {
   const user = localStorage.getItem("token");
+  const email = localStorage.getItem("email");
   const [dropDown, setDropDown] = useState(false);
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.reload();
+    localStorage.removeItem("email");
+    setDropDown(!dropDown);
   };
 
   return (
@@ -53,14 +55,14 @@ function Navbar({ darkMode, setDarkMode }) {
                   onClick={() => setDropDown(!dropDown)}
                   sx={{ bgcolor: deepOrange[500], textTransform: "uppercase" }}
                 >
-                  {user[1]}
+                  {email[1]}
                 </Avatar>
                 {dropDown && (
                   <Paper elevation={3} className="userDetails">
                     <Link to="/manage" onClick={() => setDropDown(!dropDown)}>
                       <h5 className="avatar__item">Manage Items</h5>
                     </Link>
-                    <Link to="login" onClick={() => setDropDown(!dropDown)}>
+                    <Link to="login" onClick={handleLogout}>
                       <h5 className="avatar__item">Log Out</h5>
                     </Link>
                   </Paper>
