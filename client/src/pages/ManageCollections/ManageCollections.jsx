@@ -25,6 +25,7 @@ function ManageCollections() {
     description: "",
     topic: "",
   });
+  const email = localStorage.getItem("email");
 
   const fetchData = async () => {
     await axios.get("http://localhost:8000/collections").then((res) => {
@@ -79,114 +80,119 @@ function ManageCollections() {
             {data.length === 0 ? (
               <h3>There is no Collections</h3>
             ) : (
-              data.map((item, id) => (
-                <Paper
-                  elevation={5}
-                  key={id}
-                  sx={{ marginBottom: "20px", padding: "0 10px 0 20px" }}
-                >
-                  <div className="manageCollects__list">
-                    <div className="">
-                      <div className="manageCollects__main--item">
-                        <h4>Name: {item.name}</h4>
-                        <h4>Topic: {item.topic}</h4>
-                        <h4>Description: {item.description}</h4>
-                        <Link
-                          to={{
-                            pathname: `/manage/${item.id}`,
-                            state: item.id,
-                          }}
-                        >
-                          <Button variant="outlined" sx={{ marginTop: "10px" }}>
-                            See All Items
-                          </Button>
-                        </Link>
+              data
+                .filter((object) => object.authorEmail === email)
+                .map((item, id) => (
+                  <Paper
+                    elevation={5}
+                    key={id}
+                    sx={{ marginBottom: "20px", padding: "0 10px 0 20px" }}
+                  >
+                    <div className="manageCollects__list">
+                      <div className="">
+                        <div className="manageCollects__main--item">
+                          <h4>Name: {item.name}</h4>
+                          <h4>Topic: {item.topic}</h4>
+                          <h4>Description: {item.description}</h4>
+                          <Link
+                            to={{
+                              pathname: `/manage/${item.id}`,
+                              state: item.id,
+                            }}
+                          >
+                            <Button
+                              variant="outlined"
+                              sx={{ marginTop: "10px" }}
+                            >
+                              See All Items
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                      <div>
+                        <Button>
+                          <EditIcon
+                            onClick={() =>
+                              setUpdate({
+                                id: item.id,
+                                name: item.name,
+                                description: item.description,
+                                topic: item.topic,
+                              })
+                            }
+                            sx={{
+                              color: "green",
+                              width: "28px",
+                              height: "auto",
+                            }}
+                          />
+                        </Button>
+                        <Button>
+                          <DeleteIcon
+                            onClick={() => handleDeleteCollections(item.id)}
+                            sx={{ color: "red", width: "28px", height: "auto" }}
+                          />
+                        </Button>
                       </div>
                     </div>
                     <div>
-                      <Button>
-                        <EditIcon
-                          onClick={() =>
-                            setUpdate({
-                              id: item.id,
-                              name: item.name,
-                              description: item.description,
-                              topic: item.topic,
-                            })
-                          }
+                      {update.id === item.id && (
+                        <Box
                           sx={{
-                            color: "green",
-                            width: "28px",
-                            height: "auto",
+                            maxWidth: "400px",
+                            marginTop: "-10px",
+                            paddingBottom: "20px",
                           }}
-                        />
-                      </Button>
-                      <Button>
-                        <DeleteIcon
-                          onClick={() => handleDeleteCollections(item.id)}
-                          sx={{ color: "red", width: "28px", height: "auto" }}
-                        />
-                      </Button>
-                    </div>
-                  </div>
-                  <div>
-                    {update.id === item.id && (
-                      <Box
-                        sx={{
-                          maxWidth: "400px",
-                          marginTop: "-10px",
-                          paddingBottom: "20px",
-                        }}
-                      >
-                        <form onSubmit={handleUpdateCollections}>
-                          <InputField
-                            value={update.name}
-                            name="name"
-                            handleChange={handleChange}
-                            label="Edit Name"
-                          />
-                          <InputField
-                            value={update.description}
-                            name="description"
-                            handleChange={handleChange}
-                            label="Edit Description"
-                          />
-                          <FormControl fullWidth sx={{ marginTop: "10px" }}>
-                            <InputLabel id="demo-simple-select-label">
-                              Enter A Topic
-                            </InputLabel>
-                            <Select
-                              labelId="demo-simple-select-label"
-                              id="demo-simple-select"
-                              value={update.topic}
-                              label="Enter A Topic"
-                              onChange={(e) =>
-                                setUpdate({
-                                  ...update,
-                                  topic: e.target.value,
-                                })
-                              }
+                        >
+                          <form onSubmit={handleUpdateCollections}>
+                            <InputField
+                              value={update.name}
+                              name="name"
+                              handleChange={handleChange}
+                              label="Edit Name"
+                            />
+                            <InputField
+                              value={update.description}
+                              name="description"
+                              handleChange={handleChange}
+                              label="Edit Description"
+                            />
+                            <FormControl fullWidth sx={{ marginTop: "10px" }}>
+                              <InputLabel id="demo-simple-select-label">
+                                Enter A Topic
+                              </InputLabel>
+                              <Select
+                                labelId="demo-simple-select-label"
+                                id="demo-simple-select"
+                                value={update.topic}
+                                label="Enter A Topic"
+                                onChange={(e) =>
+                                  setUpdate({
+                                    ...update,
+                                    topic: e.target.value,
+                                  })
+                                }
+                              >
+                                <MenuItem value="books">Books</MenuItem>
+                                <MenuItem value="post-stamps">
+                                  Post-Stamps
+                                </MenuItem>
+                                <MenuItem value="coins">Coins</MenuItem>
+                              </Select>
+                            </FormControl>
+                            <Button
+                              variant="contained"
+                              sx={{ marginTop: "5px" }}
+                              type="submit"
                             >
-                              <MenuItem value="books">Books</MenuItem>
-                              <MenuItem value="post-stamps">
-                                Post-Stamps
-                              </MenuItem>
-                              <MenuItem value="coins">Coins</MenuItem>
-                            </Select>
-                          </FormControl>
-                          <Button
-                            variant="contained"
-                            sx={{ marginTop: "5px" }}
-                            type="submit"
-                          >
-                            Save
-                          </Button>
-                        </form>
-                      </Box>
-                    )}
-                  </div>
-                </Paper>
-              ))
+                              Save
+                            </Button>
+                          </form>
+                        </Box>
+                      )}
+                    </div>
+                  </Paper>
+                ))
             )}
           </div>
         </div>
