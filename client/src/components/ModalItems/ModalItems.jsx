@@ -27,16 +27,15 @@ const style = {
 };
 
 export default function ModalItems({ fetching, setFetching }) {
-  const [numField, setNumField] = useState(1);
-  const [textField, setTextField] = useState(1);
-  const [multiField, setMultiField] = useState(1);
-  const [numDateField, setNumDateField] = useState(1);
-  const [numCheckField, setNumCheckField] = useState(1);
+  const [numField, setNumField] = useState(0);
+  const [textField, setTextField] = useState(0);
+  const [multiField, setMultiField] = useState(0);
+  const [numDateField, setNumDateField] = useState(0);
   const { id } = useParams();
   const [items, setItems] = useState({
     name: "",
     tags: "",
-    collectionId: id,
+    collectionsId: id,
     integerField: {},
     stringField: {},
     multilineField: {},
@@ -46,7 +45,6 @@ export default function ModalItems({ fetching, setFetching }) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [error, setError] = useState("");
 
   const handleChange = ({ currentTarget: input }) => {
     setItems({ ...items, [input.name]: input.value });
@@ -62,25 +60,20 @@ export default function ModalItems({ fetching, setFetching }) {
       setItems({
         name: "",
         tags: "",
-        collectionId: id,
+        collectionsId: id,
         integerField: {},
         stringField: {},
         multilineField: {},
         checkboxesField: {},
         dataField: {},
       });
-      setError("");
+      console.log("Success");
     } catch (error) {
       console.log("Failded", error);
-      if (
-        error.response &&
-        error.response.status >= 400 &&
-        error.response.status <= 500
-      ) {
-        setError(error.response.data.message);
-      }
     }
   };
+
+  console.log(items);
 
   return (
     <div>
@@ -104,33 +97,48 @@ export default function ModalItems({ fetching, setFetching }) {
               label="Enter A Name"
               handleChange={handleChange}
             />
-            <FormHelperText sx={{ color: "red", marginTop: "-10px" }}>
-              {error && <div>{error}</div>}
-            </FormHelperText>
+
             <InputField
-              name="description"
+              name="tags"
               value={items.tags}
               label="Enter Tags"
               handleChange={handleChange}
             />
-            <ManyFields num={numField} name="Number" type="number" />
+            <ManyFields
+              num={numField}
+              name="Number"
+              type="number"
+              items={items}
+              setItems={setItems}
+            />
             <ButtonIncrement num={numField} setNum={setNumField} />
 
-            <ManyFields num={textField} name="Text" type="text" />
+            <ManyFields
+              num={textField}
+              name="Text"
+              type="text"
+              items={items}
+              setItems={setItems}
+            />
             <ButtonIncrement num={textField} setNum={setTextField} />
 
             <ManyFields
               num={multiField}
               name="Multiline Text"
               type="multiline"
+              items={items}
+              setItems={setItems}
             />
             <ButtonIncrement num={multiField} setNum={setMultiField} />
 
-            <ManyFields num={numDateField} name="Date" type="date" />
+            <ManyFields
+              num={numDateField}
+              name="Date"
+              type="date"
+              items={items}
+              setItems={setItems}
+            />
             <ButtonIncrement num={numDateField} setNum={setNumDateField} />
-
-            <ManyFields num={numCheckField} name="" type="checkbox" />
-            <ButtonIncrement num={numCheckField} setNum={setNumCheckField} />
 
             <Button
               variant="contained"

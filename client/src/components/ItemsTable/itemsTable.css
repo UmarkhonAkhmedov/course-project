@@ -2,3 +2,68 @@
   width: 100%;
   height: 400px;
 }
+.table__container {
+  display: flex;
+  flex-direction: column;
+  font-size: 15px;
+  width: 90%;
+  margin: 100px auto 0 auto;
+}
+
+table {
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+}
+table,
+td {
+  border: 1px solid gray;
+}
+th,
+td {
+  width: 100px;
+  height: 50px;
+}
+
+th button {
+  background-color: #00e676;
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+.checkbox {
+  border: none;
+}
+
+.checkbox input {
+  width: 20px;
+  height: 20px;
+  margin: 8px 0 0 0;
+}
+
+button {
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  cursor: pointer;
+}
+
+.listButtons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 10px 0;
+  column-gap: 5px;
+}
+.block__btn {
+  background-color: red;
+}
+
+.delete__btn:hover {
+  background-color: red;
+}
+
+.active__btn {
+  background-color: #00e676;
+}

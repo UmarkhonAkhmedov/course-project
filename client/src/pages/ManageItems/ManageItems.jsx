@@ -13,7 +13,7 @@ function ManageItems() {
           <h2>All Items</h2>
           <ModalItems fetching={fetching} setFetching={setFetching} />
         </div>
-        <ItemsTable />
+        <ItemsTable fetching={fetching} />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
-import { TextField } from "@mui/material";
+import { Box, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import React from "react";
 
-function ManyFields({ name, num, type }) {
+function ManyFields({ name, num, type, items, setItems }) {
   return (
     <>
       {[...Array(num)].map((item, index) => (
@@ -47,9 +47,6 @@ function ManyFields({ name, num, type }) {
               label={`Enter ${index + 1} ${name}`}
               variant="outlined"
             />
-          )}
-          {type === "checkbox" && (
-            
           )}
         </div>
       ))}
