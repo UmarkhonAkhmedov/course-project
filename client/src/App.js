@@ -31,13 +31,11 @@ function App() {
   };
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [email]);
 
   const admin = data.filter(
     (item) => item.email === email && item.admin && item.status
   );
-
-  console.log(admin);
 
   useEffect(() => {
     localStorage.setItem("dark-mode", String(darkMode));
@@ -56,7 +54,9 @@ function App() {
             <>
               <Route path="/manage" element={<ManageCollections />} />
               <Route path="/manage/:id" element={<ManageItems />} />
-              {admin.length > 0 && <Route path="/admin" element={<Admin />} />}
+              {admin.length > 0 && (
+                <Route path="/admin" element={<Admin admin={admin} />} />
+              )}
             </>
           )}
           <Route path="/admin" element={<Navigate replace to="/" />} />
