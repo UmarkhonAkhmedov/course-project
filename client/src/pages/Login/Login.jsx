@@ -1,18 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-import "./signup.css";
+import { Link } from "react-router-dom";
+import React from "react";
+import "./login.css";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import InputField from "../../components/Form/InputField";
-import { Box, Button, Typography } from "@mui/material";
 
-const Signup = () => {
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
+function Login() {
+  const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -20,14 +16,13 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e);
     try {
-      const url = "http://localhost:8000/users/signup";
+      const url = "http://localhost:8000/users/login";
       const { data: res } = await axios.post(url, data);
-      navigate("/login");
-      console.log(data);
+      localStorage.setItem("token", res.data);
+      localStorage.setItem("email", data.email);
+      window.location = "/";
     } catch (error) {
-      console.log(error.response);
       if (
         error.response &&
         error.response.status >= 400 &&
@@ -43,24 +38,22 @@ const Signup = () => {
       <div className="container">
         <form onSubmit={handleSubmit}>
           <Typography variant="h4" color="primary" fontWeight={600} mb={5}>
-            Create Your Account
+            Login in Your Account
           </Typography>
-          <InputField
-            name="name"
-            label="Name"
-            handleChange={handleChange}
-            value={data.name}
-          />
           <InputField
             name="email"
             label="Email"
             handleChange={handleChange}
             value={data.email}
           />
-          <InputField
+          <TextField
+            sx={{ width: "100%", margin: "10px 0" }}
+            required
+            id="outlined-password-input"
             name="password"
             label="Password"
-            handleChange={handleChange}
+            type="password"
+            onChange={handleChange}
             value={data.password}
           />
           {error && <div className="error_msg">{error}</div>}
@@ -70,22 +63,22 @@ const Signup = () => {
             type="submit"
             className="btn__submit"
           >
-            Sing Up
+            Sing In
           </Button>
         </form>
         <Box className="register__link">
           <Typography variant="h6" sx={{ fontSize: "18px" }}>
-            Already, have account?
+            Don't have account?
           </Typography>
-          <Link to="/login">
+          <Link to="/signup">
             <Button size="medium" sx={{ fontWeight: 700, fontSize: "15px" }}>
-              Sing in
+              Sign Up
             </Button>
           </Link>
         </Box>
       </div>
     </div>
   );
-};
+}
 
-export default Signup;
+export default Login;

@@ -1,14 +1,18 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import React from "react";
-import "./login.css";
-import { Box, Button, Typography } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import "./signup.css";
 import InputField from "../../components/Form/InputField";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
-function Login() {
-  const [data, setData] = useState({ email: "", password: "" });
+const Signup = () => {
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -16,13 +20,14 @@ function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(e);
     try {
-      const url = "http://localhost:8000/users/login";
+      const url = "http://localhost:8000/users/signup";
       const { data: res } = await axios.post(url, data);
-      localStorage.setItem("token", res.data);
-      localStorage.setItem("email", data.email);
-      window.location = "/";
+      navigate("/login");
+      console.log(data);
     } catch (error) {
+      console.log(error.response);
       if (
         error.response &&
         error.response.status >= 400 &&
@@ -38,18 +43,28 @@ function Login() {
       <div className="container">
         <form onSubmit={handleSubmit}>
           <Typography variant="h4" color="primary" fontWeight={600} mb={5}>
-            Login in Your Account
+            Create Your Account
           </Typography>
+          <InputField
+            name="name"
+            label="Name"
+            handleChange={handleChange}
+            value={data.name}
+          />
           <InputField
             name="email"
             label="Email"
             handleChange={handleChange}
             value={data.email}
           />
-          <InputField
+          <TextField
+            sx={{ width: "100%", margin: "10px 0" }}
+            required
+            id="outlined-password-input"
             name="password"
             label="Password"
-            handleChange={handleChange}
+            type="password"
+            onChange={handleChange}
             value={data.password}
           />
           {error && <div className="error_msg">{error}</div>}
@@ -59,22 +74,22 @@ function Login() {
             type="submit"
             className="btn__submit"
           >
-            Sing In
+            Sing Up
           </Button>
         </form>
         <Box className="register__link">
           <Typography variant="h6" sx={{ fontSize: "18px" }}>
-            Don't have account?
+            Already, have account?
           </Typography>
-          <Link to="/signup">
+          <Link to="/login">
             <Button size="medium" sx={{ fontWeight: 700, fontSize: "15px" }}>
-              Sign Up
+              Sing in
             </Button>
           </Link>
         </Box>
       </div>
     </div>
   );
-}
+};
 
-export default Login;
+export default Signup;

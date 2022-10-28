@@ -55,7 +55,7 @@ function Navbar({ darkMode, setDarkMode }) {
                   onClick={() => setDropDown(!dropDown)}
                   sx={{ bgcolor: deepOrange[500], textTransform: "uppercase" }}
                 >
-                  {email[1]}
+                  {email[0]}
                 </Avatar>
                 {dropDown && (
                   <Paper elevation={3} className="userDetails">
