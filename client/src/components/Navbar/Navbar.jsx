@@ -6,7 +6,7 @@ import "./navbar.css";
 import DarkMode from "../DarkMode/DarkMode";
 import { deepOrange } from "@mui/material/colors";
 
-function Navbar({ darkMode, setDarkMode }) {
+function Navbar({ darkMode, setDarkMode, admin }) {
   const user = localStorage.getItem("token");
   const email = localStorage.getItem("email");
   const [dropDown, setDropDown] = useState(false);
@@ -49,6 +49,14 @@ function Navbar({ darkMode, setDarkMode }) {
                 <Link to="login">Login</Link>
               </Button>
             )}
+            {admin.length > 0 && (
+              <Link to="/admin">
+                <Button variant="contained" sx={{ marginRight: "20px" }}>
+                  Admin
+                </Button>
+              </Link>
+            )}
+
             {user && (
               <div className="user">
                 <Avatar
@@ -62,9 +70,9 @@ function Navbar({ darkMode, setDarkMode }) {
                     <Link to="/manage" onClick={() => setDropDown(!dropDown)}>
                       <h5 className="avatar__item">Manage Items</h5>
                     </Link>
-                    <Link to="login" onClick={handleLogout}>
+                    <a href="/login" onClick={handleLogout}>
                       <h5 className="avatar__item">Log Out</h5>
-                    </Link>
+                    </a>
                   </Paper>
                 )}
               </div>

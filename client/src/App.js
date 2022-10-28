@@ -9,9 +9,13 @@ import Login from "./pages/Login/Login";
 import Signup from "./pages/SignUp/SignUp";
 import ManageCollections from "./pages/ManageCollections/ManageCollections";
 import ManageItems from "./pages/ManageItems/ManageItems";
+import axios from "axios";
+import Admin from "./pages/Admin/Admin";
 
 function App() {
+  const [data, setData] = useState([]);
   const user = localStorage.getItem("token");
+  const email = localStorage.getItem("email");
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("dark-mode") === "true"
   );
@@ -20,6 +24,20 @@ function App() {
       mode: darkMode ? "dark" : "light",
     },
   });
+  const fetchData = async () => {
+    await axios.get("http://localhost:8000/users").then((res) => {
+      setData(res.data);
+    });
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const admin = data.filter(
+    (item) => item.email === email && item.admin && item.status
+  );
+
+  console.log(admin);
 
   useEffect(() => {
     localStorage.setItem("dark-mode", String(darkMode));
@@ -29,13 +47,19 @@ function App() {
     <Suspense fallback={null}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} />
+        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} admin={admin} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/manage" element={<ManageCollections />} />
-          <Route path="/manage/:id" element={<ManageItems />} />
+          {user && (
+            <>
+              <Route path="/manage" element={<ManageCollections />} />
+              <Route path="/manage/:id" element={<ManageItems />} />
+              {admin.length > 0 && <Route path="/admin" element={<Admin />} />}
+            </>
+          )}
+          <Route path="/admin" element={<Navigate replace to="/" />} />
         </Routes>
       </ThemeProvider>
     </Suspense>
