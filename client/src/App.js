@@ -45,15 +45,23 @@ function App() {
     <Suspense fallback={null}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
-        <Navbar darkMode={darkMode} setDarkMode={setDarkMode} admin={admin} />
+        <Navbar
+          darkMode={darkMode}
+          setDarkMode={setDarkMode}
+          admin={admin}
+          data={data}
+        />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           {user && (
             <>
-              <Route path="/manage" element={<ManageCollections />} />
-              <Route path="/manage/:id" element={<ManageItems />} />
+              <Route
+                path="/manage/:id"
+                element={<ManageCollections userData={data} />}
+              />
+              <Route path="/manage/:id/items/:id" element={<ManageItems />} />
               {admin.length > 0 && (
                 <Route path="/admin" element={<Admin admin={admin} />} />
               )}

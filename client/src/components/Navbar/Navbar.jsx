@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LanguageToggler from "../Localization/LanguageToggler";
 import { Avatar, Box, Button, Paper, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import DarkMode from "../DarkMode/DarkMode";
 import { deepOrange } from "@mui/material/colors";
 
-function Navbar({ darkMode, setDarkMode, admin }) {
+function Navbar({ darkMode, setDarkMode, admin, data }) {
+  const navigate = useNavigate();
   const user = localStorage.getItem("token");
   const email = localStorage.getItem("email");
   const [dropDown, setDropDown] = useState(false);
@@ -16,6 +17,7 @@ function Navbar({ darkMode, setDarkMode, admin }) {
     setDropDown(!dropDown);
   };
 
+  const filteredData = data.filter((item) => item.email === email);
   return (
     <Paper className="navbar" elevation={5}>
       <Box className="container">
@@ -67,7 +69,10 @@ function Navbar({ darkMode, setDarkMode, admin }) {
                 </Avatar>
                 {dropDown && (
                   <Paper elevation={3} className="userDetails">
-                    <Link to="/manage" onClick={() => setDropDown(!dropDown)}>
+                    <Link
+                      to={`/manage/${filteredData[0].id}`}
+                      onClick={() => setDropDown(!dropDown)}
+                    >
                       <h5 className="avatar__item">Manage Items</h5>
                     </Link>
                     <a href="/login" onClick={handleLogout}>

@@ -12,6 +12,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+import { useParams } from "react-router-dom";
 
 const style = {
   position: "absolute",
@@ -25,13 +26,15 @@ const style = {
   p: 6,
 };
 
-export default function ModalCollections({ fetching, setFetching }) {
-  var getEmail = localStorage.getItem("email");
+export default function ModalCollections({ fetching, setFetching, userData }) {
+  const { id } = useParams();
+  const filteredData = userData.filter((item) => item.id === id);
+  const getEmailId = filteredData[0].email;
   const [collection, setCollection] = useState({
     name: "",
     topic: "",
     description: "",
-    authorEmail: getEmail,
+    authorEmail: getEmailId,
   });
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -53,7 +56,7 @@ export default function ModalCollections({ fetching, setFetching }) {
         name: "",
         topic: "",
         description: "",
-        authorEmail: getEmail,
+        authorEmail: getEmailId,
       });
       setError("");
     } catch (error) {
