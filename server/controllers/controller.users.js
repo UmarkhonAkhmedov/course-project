@@ -56,6 +56,10 @@ export const getUser = async (req, res) => {
     if (!validPassword)
       return res.status(401).send({ message: "Invalid Email or Password" });
 
+    if (result.status === false) {
+      return res.status(401).send({ message: "Your Account is Blocked" });
+    }
+
     const token = getJwtToken(result.id);
 
     res.status(200).send({ data: token, message: "logged in successfully" });
@@ -63,6 +67,59 @@ export const getUser = async (req, res) => {
     console.log("This is error");
     console.log(error);
     res.status(500).send({ message: "Internal Server Error" });
+  }
+};
+
+export const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const result = await prisma.user.delete({
+      where: {
+        id: id,
+      },
+    });
+    res.json({ message: "User deleted successfully." });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateStatusUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const result = await prisma.user.update({
+      data: {
+        status,
+      },
+      where: {
+        id: id,
+      },
+    });
+    res.json({ message: "User updated successfully." });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateAdminUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { admin } = req.body;
+
+    const result = await prisma.user.update({
+      data: {
+        admin,
+      },
+      where: {
+        id: id,
+      },
+    });
+    res.json({ message: "User updated successfully." });
+  } catch (error) {
+    console.log(error);
   }
 };
 
