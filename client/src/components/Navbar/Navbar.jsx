@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "./navbar.css";
 import DarkMode from "../DarkMode/DarkMode";
 import { deepOrange } from "@mui/material/colors";
+import Search from "../Search/Search";
 
 function Navbar({ darkMode, setDarkMode, admin, data }) {
   const navigate = useNavigate();
@@ -29,17 +30,7 @@ function Navbar({ darkMode, setDarkMode, admin, data }) {
               </Typography>
             </Link>
           </Box>
-          <ul className="nav__list">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/questions">Questions</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
+          <Search />
           <Box className="nav__items">
             {!user && (
               <Button
