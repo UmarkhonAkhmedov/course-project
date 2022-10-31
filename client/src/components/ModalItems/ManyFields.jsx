@@ -1,16 +1,36 @@
 import { TextField } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
-function ManyFields({ name, num, type, items, setItems }) {
+function ManyFields({ name, type, items, setItems }) {
+  useEffect(() => {
+    console.log(items.integerField);
+  }, [items.integerField]);
   return (
     <>
-      {[...Array(num)].map((item, index) => (
+      {items.integerField.map((item, index) => (
         <div key={index}>
           <TextField
             sx={{ width: "100%", margin: "10px 0" }}
             id="outlined-basic"
             label={`Enter ${index + 1} ${name} Name`}
             variant="outlined"
+            name="numberName"
+            onChange={(e) =>
+              setItems((prevState) => ({
+                ...prevState,
+                integerField: prevState.integerField.map((item, i) => {
+                  if (i === index) {
+                    return {
+                      name: e.target.value,
+                      number: prevState.integerField[index].number,
+                    };
+                  } else {
+                    return item;
+                  }
+                }),
+              }))
+            }
+            value={items.integerField[index].name}
           />
           {type === "number" && (
             <TextField
@@ -18,9 +38,25 @@ function ManyFields({ name, num, type, items, setItems }) {
               id="outlined-number"
               label={`Enter ${index + 1} ${name} Field`}
               type="number"
+              value={items.integerField[index].number}
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={(e) =>
+                setItems((prevState) => ({
+                  ...prevState,
+                  integerField: prevState.integerField.map((item, i) => {
+                    if (i === index) {
+                      return {
+                        name: prevState.integerField[index].name,
+                        number: e.target.value,
+                      };
+                    } else {
+                      return item;
+                    }
+                  }),
+                }))
+              }
             />
           )}
           {type === "text" && (

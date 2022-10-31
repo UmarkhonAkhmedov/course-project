@@ -2,11 +2,22 @@ import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-function ButtonIncrement({ num, setNum }) {
+function ButtonIncrement({ setItems, field }) {
   return (
     <Box sx={{ display: "flex", alignItems: "center" }}>
       <Box>
-        <Button onClick={() => setNum(num + 1)} sx={{ width: "60px" }}>
+        <Button
+          onClick={() =>
+            setItems((prevState) => ({
+              ...prevState,
+              integerField: [
+                ...prevState.integerField,
+                { number: 0, name: "" },
+              ],
+            }))
+          }
+          sx={{ width: "60px" }}
+        >
           <AddCircleOutlineIcon sx={{ color: "#2196f3" }} />
           <Typography
             sx={{
@@ -21,10 +32,12 @@ function ButtonIncrement({ num, setNum }) {
         </Button>
       </Box>
       <Button
-        onClick={() => {
-          setNum(num - 1);
-        }}
-        disabled={num === 0}
+        onClick={() =>
+          setItems((prevState) => ({
+            ...prevState,
+            integerField: [...prevState.integerField.slice(0, -1)],
+          }))
+        }
         sx={{ width: "80px", marginLeft: "10px" }}
       >
         <RemoveCircleOutlineIcon sx={{ color: "red" }} />

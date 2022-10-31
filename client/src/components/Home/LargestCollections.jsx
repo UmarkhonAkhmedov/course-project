@@ -5,14 +5,22 @@ import "./largestCollections.css";
 
 function LargestCollections() {
   const [data, setData] = useState([]);
+  const [items, setItems] = useState([]);
   const fetchData = async () => {
     await axios.get("http://localhost:8000/collections").then((res) => {
       setData(res.data);
     });
   };
 
+  const fetchItems = async () => {
+    await axios.get("http://localhost:8000/items").then((res) => {
+      setItems(res.items);
+    });
+  };
+
   useEffect(() => {
     fetchData();
+    fetchItems();
   }, []);
 
   return (
@@ -20,7 +28,7 @@ function LargestCollections() {
       <h2>The List Of the Largest Collections</h2>
       <div className="largest__list">
         {data.map((item, index) => (
-          <Paper className="largest__item" elevation={5}>
+          <Paper className="largest__item" elevation={5} key={index}>
             <div>
               <img className="largest__item--img" src="" />
               <h4>{item.name}</h4>

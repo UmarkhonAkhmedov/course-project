@@ -26,26 +26,25 @@ const style = {
 };
 
 export default function ModalItems({ fetching, setFetching }) {
-  const [numField, setNumField] = useState(0);
-  const [textField, setTextField] = useState(0);
-  const [multiField, setMultiField] = useState(0);
-  const [numDateField, setNumDateField] = useState(0);
   const { id } = useParams();
   const [items, setItems] = useState({
     name: "",
     tags: "",
     collectionsId: id,
-    integerField: {},
-    stringField: {},
-    multilineField: {},
-    checkboxesField: {},
-    dateField: {},
+    integerField: [],
+    stringField: [],
+    multilineField: [],
+    checkboxesField: [],
+    dateField: [],
   });
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleChange = ({ currentTarget: input }) => {
+    // if (input.name === "integerField") {
+    //   setItems({ ...items });
+    // }
     setItems({ ...items, [input.name]: input.value });
   };
 
@@ -102,40 +101,48 @@ export default function ModalItems({ fetching, setFetching }) {
               handleChange={handleChange}
             />
             <ManyFields
-              num={numField}
               name="Number"
               type="number"
               items={items}
               setItems={setItems}
             />
-            <ButtonIncrement num={numField} setNum={setNumField} />
+            <ButtonIncrement field="inputField" setItems={setItems} />
 
-            <ManyFields
-              num={textField}
+            {/* <ManyFields
               name="Text"
               type="text"
               items={items}
               setItems={setItems}
             />
-            <ButtonIncrement num={textField} setNum={setTextField} />
+            <ButtonIncrement
+              num={textField}
+              setNum={setTextField}
+              setItems={setItems}
+            />
 
             <ManyFields
-              num={multiField}
               name="Multiline Text"
               type="multiline"
               items={items}
               setItems={setItems}
             />
-            <ButtonIncrement num={multiField} setNum={setMultiField} />
+            <ButtonIncrement
+              num={multiField}
+              setNum={setMultiField}
+              setItems={setItems}
+            />
 
             <ManyFields
-              num={numDateField}
               name="Date"
               type="date"
               items={items}
               setItems={setItems}
             />
-            <ButtonIncrement num={numDateField} setNum={setNumDateField} />
+            <ButtonIncrement
+              num={numDateField}
+              setNum={setNumDateField}
+              setItems={setItems}
+            /> */}
 
             <Button
               variant="contained"

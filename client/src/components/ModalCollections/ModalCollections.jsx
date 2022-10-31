@@ -5,9 +5,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import InputField from "../Form/InputField";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import {
   FormControl,
   FormHelperText,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
@@ -30,32 +32,55 @@ export default function ModalCollections({ fetching, setFetching, userData }) {
   const { id } = useParams();
   const filteredData = userData.filter((item) => item.id === id);
   const getEmailId = filteredData[0].email;
-  const [collection, setCollection] = useState({
-    name: "",
-    topic: "",
-    description: "",
-    authorEmail: getEmailId,
-  });
+  const [imageSrc, setImageSrc] = useState("");
+  const [image, setImage] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [error, setError] = useState("");
+  const [collection, setCollection] = useState({
+    name: "",
+    topic: "",
+    img: "",
+    description: "",
+    authorEmail: getEmailId,
+  });
 
   const handleChange = ({ currentTarget: input }) => {
     setCollection({ ...collection, [input.name]: input.value });
   };
+  const uploadImage = () => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "koe1v73v");
+    data.append("cloud_name", "dp9ym424k");
+
+    fetch("https://api.cloudinary.com/v1_1/dp9ym424k/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((r) => r.json())
+      .then((result) =>
+        setCollection({ ...collection, img: result.secure_url })
+      );
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    uploadImage();
     try {
       const url = "http://localhost:8000/collections/create";
-      const { collection: res } = await axios.post(url, collection);
+      if (collection.img.length === 0) {
+        const { collection: res } = await axios.post(url, collection);
+      }
+      console.log(collection);
       setOpen(false);
       setFetching(!fetching);
       setCollection({
         name: "",
         topic: "",
         description: "",
+        img: "",
         authorEmail: getEmailId,
       });
       setError("");
@@ -120,10 +145,25 @@ export default function ModalCollections({ fetching, setFetching, userData }) {
                 <MenuItem value="coins">Coins</MenuItem>
               </Select>
             </FormControl>
+            <IconButton
+              color="primary"
+              aria-label="upload picture"
+              component="label"
+            >
+              <input
+                hidden
+                type="file"
+                onChange={(event) => {
+                  setImage(event.target.files[0]);
+                }}
+              />
+              <PhotoCamera />
+            </IconButton>
             <Button
               variant="contained"
               type="submit"
-              sx={{ marginTop: "40px" }}
+              s
+              sx={{ marginTop: "40px", disply: "block" }}
             >
               Create
             </Button>
