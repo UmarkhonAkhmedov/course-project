@@ -11,6 +11,7 @@ import ManageCollections from "./pages/ManageCollections/ManageCollections";
 import ManageItems from "./pages/ManageItems/ManageItems";
 import axios from "axios";
 import Admin from "./pages/Admin/Admin";
+import Details from "./pages/Details/Details";
 
 function App() {
   const [data, setData] = useState([]);
@@ -67,6 +68,7 @@ function App() {
               )}
             </>
           )}
+          <Route path="/details/:id" element={<Details />} />
           <Route path="/admin" element={<Navigate replace to="/" />} />
         </Routes>
       </ThemeProvider>
