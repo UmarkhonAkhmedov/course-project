@@ -1,0 +1,11 @@
+.writeComments {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  width: 100%;
+}
+
+.writeComments__heading {
+  margin-bottom: 30px;
+  margin-left: 10px;
+}
