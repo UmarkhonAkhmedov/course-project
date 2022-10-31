@@ -14,7 +14,7 @@ export const getAllCollections = async (req, res) => {
 };
 
 export const createCollection = async (req, res) => {
-  const { name, description, topic, authorEmail } = req.body;
+  const { name, description, topic, authorEmail, img } = req.body;
   try {
     const result = await prisma.collection.create({
       data: {
@@ -22,6 +22,7 @@ export const createCollection = async (req, res) => {
         description,
         topic,
         authorEmail,
+        img,
       },
     });
 

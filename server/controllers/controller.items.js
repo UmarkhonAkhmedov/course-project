@@ -13,6 +13,21 @@ export const getAllItems = async (req, res) => {
   }
 };
 
+export const getSearchItems = async (req, res) => {
+  const { term } = req.query;
+
+  try {
+    const result = await prisma.item.findMany({
+      where: {
+        name: term,
+      },
+    });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const createItem = async (req, res) => {
   const {
     name,
@@ -94,24 +109,6 @@ export const updateItem = async (req, res) => {
     console.log(error);
   }
 };
-export const likeItem = async (req, res) => {
-  const { id } = req.params;
 
-  try {
-    const result = await prisma.item.update({
-      where: {
-        id,
-      },
-      data: {
-        viewContent: {
-          increment: 1,
-        },
-      },
-    });
-    res.status(201).json(result);
-  } catch (error) {
-    res.status(409).json({ message: error.message });
-  }
-};
 
 export default router;

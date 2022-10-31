@@ -5,6 +5,7 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
 }
 
 model User {
@@ -35,7 +36,6 @@ model Item {
   updatedAt DateTime @updatedAt
   name String
   tags String
-  viewContent Int @default(0)
   integerField Json?
   stringField Json?
   multilineField Json?
@@ -44,6 +44,7 @@ model Item {
   collectionsId String?
   collections Collection? @relation(fields: [collectionsId], references: [id])
   comments Comment[]
+  likes Like[]
 }
 
 model Comment {
@@ -52,6 +53,14 @@ model Comment {
   itemId String?
   authorEmail String
   Items Item? @relation(fields: [itemId], references: [id])
+}
+
+model Like {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  authorEmail String?
+  count Int @default(0)
+  itemId String?
+  items Item? @relation(fields: [itemId], references: [id])
 }
 
 
