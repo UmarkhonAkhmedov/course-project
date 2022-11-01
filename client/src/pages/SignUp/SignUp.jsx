@@ -22,7 +22,7 @@ const Signup = () => {
     e.preventDefault();
     console.log(e);
     try {
-      const url = "https://ua-collects-app.herokuapp.com/users/signup";
+      const url = "http://localhost:8000/users/signup";
       const { data: res } = await axios.post(url, data);
       navigate("/login");
       console.log(data);

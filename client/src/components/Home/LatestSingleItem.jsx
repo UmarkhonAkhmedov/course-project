@@ -22,7 +22,7 @@ function LatestSingleItem({
   const [save, setSave] = useState({ authorEmail: email, itemId: id });
 
   const fetchData = async () => {
-    await axios.get("https://ua-collects-app.herokuapp.com/like").then((res) => {
+    await axios.get("http://localhost:8000/like").then((res) => {
       setDataLikes(res.data);
     });
   };
@@ -36,13 +36,13 @@ function LatestSingleItem({
 
   const handleLikeButton = async () => {
     if (filteredData.length === 0) {
-      const url = "https://ua-collects-app.herokuapp.com/like/create";
+      const url = "http://localhost:8000/like/create";
       const { save: res } = await axios.post(url, save);
       setFetching(!fetching);
     } else {
       const ids = filteredData[0].id;
       await axios
-        .delete(`https://ua-collects-app.herokuapp.com/like/remove/${ids}`)
+        .delete(`http://localhost:8000/like/remove/${ids}`)
         .then((res) => {});
       setFetching(!fetching);
     }

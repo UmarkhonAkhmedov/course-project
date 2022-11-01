@@ -66,7 +66,7 @@ export default function ModalItems({ fetching, setFetching }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "https://ua-collects-app.herokuapp.com/items/create";
+      const url = "http://localhost:8000/items/create";
       const { items: res } = await axios.post(url, items);
       setOpen(false);
       setFetching(!fetching);

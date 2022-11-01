@@ -21,7 +21,7 @@ function WriteComment() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "https://ua-collects-app.herokuapp.com/comments/create";
+      const url = "http://localhost:8000/comments/create";
       const { data: res } = await axios.post(url, data);
       setData({
         text: "",

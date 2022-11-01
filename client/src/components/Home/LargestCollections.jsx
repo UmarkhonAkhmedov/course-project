@@ -10,7 +10,7 @@ function LargestCollections() {
   const [data, setData] = useState([]);
   const fetchData = async () => {
     await axios
-      .get("https://ua-collects-app.herokuapp.com/collections/withItems")
+      .get("http://localhost:8000/collections/withItems")
       .then((res) => {
         setData(res.data);
       });

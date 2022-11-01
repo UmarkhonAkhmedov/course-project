@@ -27,7 +27,7 @@ function App() {
     },
   });
   const fetchData = async () => {
-    await axios.get("https://ua-collects-app.herokuapp.com/users").then((res) => {
+    await axios.get("http://localhost:8000/users").then((res) => {
       setData(res.data);
     });
   };

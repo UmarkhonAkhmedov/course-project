@@ -10,11 +10,9 @@ function LatestItems() {
   const [fetching, setFetching] = useState(false);
 
   const fetchData = async () => {
-    await axios
-      .get("https://ua-collects-app.herokuapp.com/items/like")
-      .then((res) => {
-        setData(res.data);
-      });
+    await axios.get("http://localhost:8000/items/like").then((res) => {
+      setData(res.data);
+    });
   };
 
   useEffect(() => {
