@@ -1,5 +1,13 @@
 {
   "lan1": "English",
   "lan2": "Uzbek",
-  "done": "Bo'ldi"
+  "done": "Bo'ldi",
+  "latest": "Eng So'ngi Narsalar",
+  "oldest": "Eng Eski To'plamlar",
+  "search": "Narsalar Izlash",
+  "name": "Ismi",
+  "tag": "Havolalar",
+  "seeDetails": "Detallarini ko'rish",
+  "seeItems": "Narsalarni ko'rish",
+  "numberItems": "Narsalarning soni"
 }

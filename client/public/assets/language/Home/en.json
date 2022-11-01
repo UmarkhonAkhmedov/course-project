@@ -1,5 +1,13 @@
 {
   "lan1": "English",
   "lan2": "Uzbek",
-  "done": "Done"
+  "done": "Done",
+  "latest": "The List Of the Latest Items",
+  "oldest": "The List Of the Oldest Collections",
+  "search": "Search Items",
+  "name": "Name",
+  "tag": "Tags",
+  "seeDetails": "See Details",
+  "seeItems": "See Items",
+  "numberItems": "Number of Items"
 }
