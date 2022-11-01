@@ -36,6 +36,7 @@ model Item {
   updatedAt DateTime @updatedAt
   name String
   tags String
+  img String?
   integerField Json?
   stringField Json?
   multilineField Json?
