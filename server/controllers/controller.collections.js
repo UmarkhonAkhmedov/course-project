@@ -13,6 +13,20 @@ export const getAllCollections = async (req, res) => {
   }
 };
 
+export const getAllCollectionsWithItems = async (req, res) => {
+  try {
+    const result = await prisma.collection.findMany({
+      include: {
+        items: true,
+      },
+    });
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const createCollection = async (req, res) => {
   const { name, description, topic, authorEmail, img } = req.body;
   try {

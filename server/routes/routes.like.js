@@ -1,12 +1,16 @@
 import express from "express";
 import {
-  likeItemDecrement,
+  getAllLikes,
+  deleteLike,
   likeItemIncrement,
+  createLikeItem,
 } from "../controllers/controller.like.js";
 
 const router = express.Router();
 
-router.post("/add", likeItemIncrement);
-router.post("/remove", likeItemDecrement);
+router.patch("/add", likeItemIncrement);
+router.delete("/remove/:id", deleteLike);
+router.post("/create", createLikeItem);
+router.get("/", getAllLikes);
 
 export default router;

@@ -13,6 +13,23 @@ export const getAllItems = async (req, res) => {
   }
 };
 
+export const getAllItemsWithLike = async (req, res) => {
+  try {
+    const result = await prisma.item.findMany({
+      include: {
+        likes: {
+          select: {
+            count: true,
+          },
+        },
+      },
+    });
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const getSearchItems = async (req, res) => {
   const { term } = req.query;
 
@@ -109,6 +126,5 @@ export const updateItem = async (req, res) => {
     console.log(error);
   }
 };
-
 
 export default router;
