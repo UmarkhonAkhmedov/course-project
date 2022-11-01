@@ -6,6 +6,11 @@ import itemRoutes from "./routes/routes.items.js";
 import commentRoutes from "./routes/routes.comments.js";
 import likeRoutes from "./routes/routes.like.js";
 import cookieParser from "cookie-parser";
+import * as path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -19,6 +24,12 @@ app.use("/items", itemRoutes);
 app.use("/comments", commentRoutes);
 app.use("/like", likeRoutes);
 
-const PORT = process.env.PORT || 8000;
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client-side/build", "index.html"));
+});
+
+const PORT = process.env.PORT || 80;
 
 app.listen(PORT, () => console.log(`Listening on port: 8000`));
