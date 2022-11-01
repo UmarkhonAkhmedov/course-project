@@ -1,24 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Button, Paper } from "@mui/material";
 import "./latestItems.css";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { Link } from "react-router-dom";
 import LatestSingleItem from "./LatestSingleItem";
 
 function LatestItems() {
   const [data, setData] = useState([]);
+  const [fetching, setFetching] = useState(false);
 
   const fetchData = async () => {
-    await axios.get("http://localhost:8000/items").then((res) => {
+    await axios.get("http://localhost:8000/items/like").then((res) => {
       setData(res.data);
     });
   };
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetching]);
 
   return (
     <div className="latest">
@@ -26,11 +23,14 @@ function LatestItems() {
       <div className="latest__lists">
         {[...data].reverse().map((item) => (
           <LatestSingleItem
+            fetching={fetching}
+            setFetching={setFetching}
             key={item.id}
             name={item.name}
             tags={item.tags}
             data={data}
-            viewContent={item.viewContent}
+            id={item.id}
+            likes={item.likes.length}
           />
         ))}
       </div>
