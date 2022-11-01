@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "heroku-postbuild": "cd client-side && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "prisma": {
     "seed": "node ./prisma/seed.js"
