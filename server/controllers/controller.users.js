@@ -18,7 +18,7 @@ export const getAllUsers = async (req, res) => {
 export const createUser = async (req, res) => {
   try {
     const { name, email, password, status, admin } = req.body;
-    const salt = await bcrypt.genSalt(Number(process.env.BCRYPT__NUMBER));
+    const salt = await bcrypt.genSalt(Number(10));
     const hashPassword = await bcrypt.hash(password, salt);
 
     const result = await prisma.user.create({
