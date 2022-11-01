@@ -12,6 +12,7 @@ import ManageItems from "./pages/ManageItems/ManageItems";
 import axios from "axios";
 import Admin from "./pages/Admin/Admin";
 import Details from "./pages/Details/Details";
+import Items from "./pages/Items/Items";
 
 function App() {
   const [data, setData] = useState([]);
@@ -69,6 +70,7 @@ function App() {
             </>
           )}
           <Route path="/details/:id" element={<Details />} />
+          <Route path="/items/:id" element={<Items />} />
           <Route path="/admin" element={<Navigate replace to="/" />} />
         </Routes>
       </ThemeProvider>

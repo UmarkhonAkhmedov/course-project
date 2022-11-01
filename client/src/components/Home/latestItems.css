@@ -3,8 +3,9 @@
 }
 
 .latest__lists {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-content: center;
   flex-wrap: wrap;
   column-gap: 20px;
   row-gap: 40px;
@@ -17,6 +18,7 @@
   width: 280px;
   row-gap: 10px;
   cursor: pointer;
+  border: 20px;
 }
 
 .latest__button {
@@ -30,4 +32,10 @@
   cursor: pointer;
   margin-top: auto;
   color: red;
+}
+
+.singleItem__img {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 10px;
 }
