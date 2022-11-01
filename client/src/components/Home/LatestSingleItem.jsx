@@ -67,7 +67,7 @@ function LatestSingleItem({
         </Button>
       </Link>
       <h5 className="latest__heart" onClick={handleLikeButton}>
-        <ThumbUpAltIcon />
+        <ThumbUpAltIcon sx={{ marginRight: "7px" }} />
         {likes === -1 ? 0 : likes}
       </h5>
     </Paper>
