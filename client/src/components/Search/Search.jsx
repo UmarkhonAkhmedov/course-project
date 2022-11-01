@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
@@ -10,6 +11,7 @@ import axios from "axios";
 
 export default function Search() {
   const [inputText, setInputText] = useState("");
+  const { i18n, t } = useTranslation(["Home"]);
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
   let inputHandler = (e) => {
@@ -59,7 +61,7 @@ export default function Search() {
     >
       <InputBase
         sx={{ ml: 3, flex: 1 }}
-        placeholder="Search Items"
+        placeholder={t("search")}
         inputProps={{ "aria-label": "search items" }}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();

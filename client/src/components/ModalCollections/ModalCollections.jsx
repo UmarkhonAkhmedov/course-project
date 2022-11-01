@@ -32,12 +32,12 @@ export default function ModalCollections({ fetching, setFetching, userData }) {
   const { id } = useParams();
   const filteredData = userData.filter((item) => item.id === id);
   const getEmailId = filteredData[0].email;
-  const [imageSrc, setImageSrc] = useState("");
   const [image, setImage] = useState("");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [error, setError] = useState("");
+  const [save, setSave] = useState(false);
   const [collection, setCollection] = useState({
     name: "",
     topic: "",
@@ -60,20 +60,18 @@ export default function ModalCollections({ fetching, setFetching, userData }) {
       body: data,
     })
       .then((r) => r.json())
-      .then((result) =>
-        setCollection({ ...collection, img: result.secure_url })
-      );
+      .then((result) => {
+        setCollection({ ...collection, img: result.secure_url });
+      });
+    setSave(true);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    uploadImage();
+
     try {
       const url = "http://localhost:8000/collections/create";
-      if (collection.img.length === 0) {
-        const { collection: res } = await axios.post(url, collection);
-      }
-      console.log(collection);
+      const { collection: res } = await axios.post(url, collection);
       setOpen(false);
       setFetching(!fetching);
       setCollection({
@@ -83,6 +81,7 @@ export default function ModalCollections({ fetching, setFetching, userData }) {
         img: "",
         authorEmail: getEmailId,
       });
+      setSave(false);
       setError("");
     } catch (error) {
       console.log("Failded", error);
@@ -145,25 +144,29 @@ export default function ModalCollections({ fetching, setFetching, userData }) {
                 <MenuItem value="coins">Coins</MenuItem>
               </Select>
             </FormControl>
-            <IconButton
-              color="primary"
-              aria-label="upload picture"
-              component="label"
-            >
-              <input
-                hidden
-                type="file"
-                onChange={(event) => {
-                  setImage(event.target.files[0]);
-                }}
-              />
-              <PhotoCamera />
-            </IconButton>
+            <Box sx={{ marginTop: "10px" }}>
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="label"
+              >
+                <input
+                  hidden
+                  type="file"
+                  onChange={(event) => {
+                    setImage(event.target.files[0]);
+                  }}
+                />
+                <PhotoCamera />
+              </IconButton>
+              <Button onClick={uploadImage}>
+                {save ? "Saved" : "Save Image"}
+              </Button>
+            </Box>
             <Button
               variant="contained"
               type="submit"
-              s
-              sx={{ marginTop: "40px", disply: "block" }}
+              sx={{ marginTop: "30px", disply: "block" }}
             >
               Create
             </Button>

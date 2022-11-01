@@ -17,11 +17,10 @@ function Details() {
           .filter((item) => item.id === id)
           .map((item, index) => (
             <Paper key={index} elevation={10} className="details__list">
-              <img className="details__list--img" src="" />
+              <img className="details__list--img" src={item.img} />
               <div>
                 <h3>Name: {item.name}</h3>
                 <h3>Tags: {item.tags}</h3>
-                <h3>Tags: {item.viewContent}</h3>
               </div>
             </Paper>
           ))}

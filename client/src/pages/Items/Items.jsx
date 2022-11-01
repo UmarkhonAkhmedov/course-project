@@ -27,6 +27,7 @@ function Items() {
               data={data}
               id={item.id}
               likes={0}
+              img={item.img}
             />
           ))}
         </div>

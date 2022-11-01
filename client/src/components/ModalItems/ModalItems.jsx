@@ -5,9 +5,11 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import InputField from "../Form/InputField";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import ButtonIncrement from "./ButtonIncrement";
 import ManyFields from "./ManyFields";
+import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { IconButton } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -27,25 +29,38 @@ const style = {
 
 export default function ModalItems({ fetching, setFetching }) {
   const { id } = useParams();
+  const [image, setImage] = useState("");
+  const [save, setSave] = useState(false);
   const [items, setItems] = useState({
     name: "",
     tags: "",
+    img: "",
     collectionsId: id,
-    integerField: [],
-    stringField: [],
-    multilineField: [],
-    checkboxesField: [],
-    dateField: [],
   });
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleChange = ({ currentTarget: input }) => {
-    // if (input.name === "integerField") {
-    //   setItems({ ...items });
-    // }
     setItems({ ...items, [input.name]: input.value });
+  };
+
+  const uploadImage = () => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "koe1v73v");
+    data.append("cloud_name", "dp9ym424k");
+
+    fetch("https://api.cloudinary.com/v1_1/dp9ym424k/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((r) => r.json())
+      .then((result) => {
+        setItems({ ...items, img: result.secure_url });
+        console.log(result.secure_url);
+      });
+    setSave(true);
   };
 
   const handleSubmit = async (e) => {
@@ -58,13 +73,10 @@ export default function ModalItems({ fetching, setFetching }) {
       setItems({
         name: "",
         tags: "",
+        img: "",
         collectionsId: id,
-        integerField: {},
-        stringField: {},
-        multilineField: {},
-        checkboxesField: {},
-        dataField: {},
       });
+      setSave(false);
       console.log("Success");
     } catch (error) {
       console.log("Failded", error);
@@ -100,13 +112,32 @@ export default function ModalItems({ fetching, setFetching }) {
               label="Enter Tags"
               handleChange={handleChange}
             />
-            <ManyFields
+            <Box sx={{ marginTop: "10px" }}>
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="label"
+              >
+                <input
+                  hidden
+                  type="file"
+                  onChange={(event) => {
+                    setImage(event.target.files[0]);
+                  }}
+                />
+                <PhotoCamera />
+              </IconButton>
+              <Button onClick={uploadImage}>
+                {save ? "Saved" : "Save Image"}
+              </Button>
+            </Box>
+            {/* <ManyFields
               name="Number"
               type="number"
               items={items}
               setItems={setItems}
             />
-            <ButtonIncrement field="inputField" setItems={setItems} />
+            <ButtonIncrement field="inputField" setItems={setItems} /> */}
 
             {/* <ManyFields
               name="Text"
@@ -147,7 +178,7 @@ export default function ModalItems({ fetching, setFetching }) {
             <Button
               variant="contained"
               type="submit"
-              sx={{ marginTop: "40px" }}
+              sx={{ marginTop: "30px", marginLeft: "0px" }}
             >
               Create
             </Button>

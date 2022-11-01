@@ -97,10 +97,8 @@ function ManageCollections({ userData }) {
                         <h4>Topic: {item.topic}</h4>
                         <h4>Description: {item.description}</h4>
                         <Link
-                          to={{
-                            pathname: `/manage/${filteredData[0].id}/items/${item.id}`,
-                            state: item.id,
-                          }}
+                          to={`/manage/${filteredData[0].id}/items/${item.id}`}
+                          state={{ data: filteredData[0].id }}
                         >
                           <Button variant="outlined" sx={{ marginTop: "10px" }}>
                             See All Items

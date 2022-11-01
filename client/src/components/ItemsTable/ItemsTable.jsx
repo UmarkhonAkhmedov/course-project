@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Box, Button } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import "./itemsTable.css";
 import InputField from "../Form/InputField";
@@ -12,19 +12,12 @@ function ItemsTable({ fetching }) {
   const [open, setOpen] = useState(false);
   const filteredData = data.filter((item) => item.collectionsId === id);
   const editElement = select[0];
-  // const editElementFiltered = filteredData.filter((item) => {
-  //   if (item.id === editElement) return item;
-  // });
 
   const [items, setItems] = useState({
     name: "",
     tags: "",
+    img: "",
     collectionsId: id,
-    integerField: {},
-    stringField: {},
-    multilineField: {},
-    checkboxesField: {},
-    dateField: {},
   });
 
   const fetchData = async () => {
@@ -118,7 +111,6 @@ function ItemsTable({ fetching }) {
               <th>Id</th>
               <th>Name</th>
               <th>Tags</th>
-              <th>Like Count</th>
             </tr>
           </thead>
           {filteredData.map((item, index) => (
@@ -135,7 +127,6 @@ function ItemsTable({ fetching }) {
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.tags}</td>
-                <td>{item.viewContent}</td>
               </tr>
             </tbody>
           ))}
