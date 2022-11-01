@@ -21,9 +21,11 @@ function ItemsTable({ fetching }) {
   });
 
   const fetchData = async () => {
-    await axios.get("http://localhost:8000/items").then((res) => {
-      setData(res.data);
-    });
+    await axios
+      .get("https://ua-collects-app.herokuapp.com/items")
+      .then((res) => {
+        setData(res.data);
+      });
   };
   useEffect(() => {
     fetchData();
@@ -50,7 +52,7 @@ function ItemsTable({ fetching }) {
   const handleDeleteProperty = async () => {
     for (let i = 0; i < select.length; i++) {
       try {
-        const url = `http://localhost:8000/items/delete/${select[i]}`;
+        const url = `https://ua-collects-app.herokuapp.com/items/delete/${select[i]}`;
         const res = await axios.delete(url);
         if (res.status === 200 || res.status === 201) {
           setSelect([]);
@@ -64,7 +66,7 @@ function ItemsTable({ fetching }) {
 
   const handleEditProperty = async () => {
     try {
-      const url = `http://localhost:8000/items/update/${editElement}`;
+      const url = `https://ua-collects-app.herokuapp.com/items/update/${editElement}`;
       const res = await axios.patch(url, items);
 
       if (res.status === 200 || res.status === 201) {

@@ -11,9 +11,11 @@ function UserManagement({ admin }) {
   const navigate = useNavigate();
 
   const fetchData = async () => {
-    await axios.get("http://localhost:8000/users").then((res) => {
-      setData(res.data);
-    });
+    await axios
+      .get("https://ua-collects-app.herokuapp.com/users")
+      .then((res) => {
+        setData(res.data);
+      });
   };
 
   useEffect(() => {
@@ -34,7 +36,7 @@ function UserManagement({ admin }) {
   const handleDeleteProperty = async () => {
     for (let i = 0; i < select.length; i++) {
       try {
-        const url = `http://localhost:8000/users/delete/${select[i]}`;
+        const url = `https://ua-collects-app.herokuapp.com/users/delete/${select[i]}`;
         const res = await axios.delete(url);
         if (res.status === 200 || res.status === 201) {
           data.map((item) => {
@@ -55,7 +57,7 @@ function UserManagement({ admin }) {
   const handleUpdateStatusBlock = async () => {
     for (let i = 0; i < select.length; i++) {
       try {
-        const url = `http://localhost:8000/users/status/${select[i]}`;
+        const url = `https://ua-collects-app.herokuapp.com/users/status/${select[i]}`;
         const res = await axios.patch(url, { status: false });
         if (res.status === 200 || res.status === 201) {
           data.map((item) => {
@@ -76,7 +78,7 @@ function UserManagement({ admin }) {
   const handleUpdateStatusActive = async () => {
     for (let i = 0; i < select.length; i++) {
       try {
-        const url = `http://localhost:8000/users/status/${select[i]}`;
+        const url = `https://ua-collects-app.herokuapp.com/users/status/${select[i]}`;
         const res = await axios.patch(url, { status: true });
         fetchData();
       } catch (error) {
@@ -88,7 +90,7 @@ function UserManagement({ admin }) {
   const handleUpdateNotAdmin = async () => {
     for (let i = 0; i < select.length; i++) {
       try {
-        const url = `http://localhost:8000/users/admin/${select[i]}`;
+        const url = `https://ua-collects-app.herokuapp.com/users/admin/${select[i]}`;
         const res = await axios.patch(url, { admin: false });
         if (res.status === 200 || res.status === 201) {
           if (select[i] === admin[0].id) {
@@ -105,7 +107,7 @@ function UserManagement({ admin }) {
   const handleUpdateAdmin = async () => {
     for (let i = 0; i < select.length; i++) {
       try {
-        const url = `http://localhost:8000/users/admin/${select[i]}`;
+        const url = `https://ua-collects-app.herokuapp.com/users/admin/${select[i]}`;
         const res = await axios.patch(url, { admin: true });
         fetchData();
       } catch (error) {
