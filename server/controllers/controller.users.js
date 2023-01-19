@@ -64,8 +64,6 @@ export const getUser = async (req, res) => {
 
     res.status(200).send({ data: token, message: "logged in successfully" });
   } catch (error) {
-    console.log("This is error");
-    console.log(error);
     res.status(500).send({ message: "Internal Server Error" });
   }
 };
@@ -81,7 +79,7 @@ export const deleteUser = async (req, res) => {
     });
     res.json({ message: "User deleted successfully." });
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 };
 
@@ -100,7 +98,7 @@ export const updateStatusUser = async (req, res) => {
     });
     res.json({ message: "User updated successfully." });
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 };
 
@@ -119,7 +117,7 @@ export const updateAdminUser = async (req, res) => {
     });
     res.json({ message: "User updated successfully." });
   } catch (error) {
-    console.log(error);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 };
 

@@ -57,7 +57,7 @@ export const deleteCollection = async (req, res) => {
     });
     res.json({ message: "User deleted successfully." });
   } catch (error) {
-    console.log(error);
+    res.status(409).json({ message: error.message });
   }
 };
 
@@ -78,7 +78,7 @@ export const updateCollection = async (req, res) => {
     });
     res.json({ message: "User deleted successfully." });
   } catch (error) {
-    console.log(error);
+    res.status(409).json({ message: error.message });
   }
 };
 

@@ -17,7 +17,6 @@ export const createLikeItem = async (req, res) => {
     });
     res.status(201).json(result);
   } catch (error) {
-    console.log(error);
     res.status(409).json({ message: error.message });
   }
 };
@@ -63,7 +62,7 @@ export const deleteLike = async (req, res) => {
     });
     res.json({ message: "User deleted successfully." });
   } catch (error) {
-    console.log(error);
+    res.status(409).json({ message: error.message });
   }
 };
 export const likeItemDecrement = async (req, res) => {
