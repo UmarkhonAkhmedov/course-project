@@ -54,7 +54,7 @@ function LatestSingleItem({
       <h4>
         {t("name")}: {name}
       </h4>
-      <h4>
+      <h4 style={{ marginBottom: "auto" }}>
         {t("tag")}: {tags}
       </h4>
       <Link
@@ -66,10 +66,10 @@ function LatestSingleItem({
           {t("seeDetails")}
         </Button>
       </Link>
-      <h5 className="latest__heart" onClick={handleLikeButton}>
+      {/* <h5 className="latest__heart" onClick={handleLikeButton}>
         <ThumbUpAltIcon sx={{ marginRight: "7px" }} />
         {likes === -1 ? 0 : likes}
-      </h5>
+      </h5> */}
     </Paper>
   );
 }

@@ -17,8 +17,8 @@ function Navbar({ darkMode, setDarkMode, admin, data }) {
     localStorage.removeItem("email");
     setDropDown(!dropDown);
   };
-
   const filteredData = data.filter((item) => item.email === email);
+
   return (
     <Paper className="navbar" elevation={5}>
       <Box className="container">
