@@ -24,7 +24,9 @@ export default function Search() {
 
   const fetchData = async () => {
     await axios
-      .get(`http://localhost:8000/items/search?term=${inputText}`)
+      .get(
+        `https://course-project-rgk2.vercel.app/items/search?term=${inputText}`
+      )
       .then((res) => {
         setData(res.data);
       });

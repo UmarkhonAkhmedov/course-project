@@ -22,9 +22,11 @@ function LatestSingleItem({
   const [save, setSave] = useState({ authorEmail: email, itemId: id });
 
   const fetchData = async () => {
-    await axios.get("http://localhost:8000/like").then((res) => {
-      setDataLikes(res.data);
-    });
+    await axios
+      .get("https://course-project-rgk2.vercel.app/like")
+      .then((res) => {
+        setDataLikes(res.data);
+      });
   };
   useEffect(() => {
     fetchData();
@@ -36,13 +38,13 @@ function LatestSingleItem({
 
   const handleLikeButton = async () => {
     if (filteredData.length === 0) {
-      const url = "http://localhost:8000/like/create";
+      const url = "https://course-project-rgk2.vercel.app/like/create";
       const { save: res } = await axios.post(url, save);
       setFetching(!fetching);
     } else {
       const ids = filteredData[0].id;
       await axios
-        .delete(`http://localhost:8000/like/remove/${ids}`)
+        .delete(`https://course-project-rgk2.vercel.app/like/remove/${ids}`)
         .then((res) => {});
       setFetching(!fetching);
     }

@@ -10,7 +10,7 @@ function LargestCollections() {
   const [data, setData] = useState([]);
   const fetchData = async () => {
     await axios
-      .get("http://localhost:8000/collections/withItems")
+      .get("https://course-project-rgk2.vercel.app/collections/withItems")
       .then((res) => {
         setData(res.data);
       });

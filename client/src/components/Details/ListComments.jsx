@@ -8,9 +8,11 @@ function ListComments() {
   const { id } = useParams();
   const [data, setData] = useState([]);
   const fetchData = async () => {
-    await axios.get("http://localhost:8000/comments").then((res) => {
-      setData(res.data);
-    });
+    await axios
+      .get("https://course-project-rgk2.vercel.app/comments")
+      .then((res) => {
+        setData(res.data);
+      });
   };
   useEffect(() => {
     fetchData();

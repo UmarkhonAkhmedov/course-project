@@ -66,7 +66,7 @@ export default function ModalItems({ fetching, setFetching }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8000/items/create";
+      const url = "https://course-project-rgk2.vercel.app/items/create";
       const { items: res } = await axios.post(url, items);
       setOpen(false);
       setFetching(!fetching);

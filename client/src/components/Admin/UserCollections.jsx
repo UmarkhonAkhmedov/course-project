@@ -7,9 +7,11 @@ import "./userManagement.css";
 function UserCollections() {
   const [data, setData] = useState([]);
   const fetchData = async () => {
-    await axios.get("http://localhost:8000/users").then((res) => {
-      setData(res.data);
-    });
+    await axios
+      .get("https://course-project-rgk2.vercel.app/users")
+      .then((res) => {
+        setData(res.data);
+      });
   };
   useEffect(() => {
     fetchData();

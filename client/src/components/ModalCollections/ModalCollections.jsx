@@ -70,7 +70,7 @@ export default function ModalCollections({ fetching, setFetching, userData }) {
     e.preventDefault();
 
     try {
-      const url = "http://localhost:8000/collections/create";
+      const url = "https://course-project-rgk2.vercel.app/collections/create";
       const { collection: res } = await axios.post(url, collection);
       setOpen(false);
       setFetching(!fetching);

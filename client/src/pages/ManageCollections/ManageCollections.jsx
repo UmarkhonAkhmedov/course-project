@@ -28,16 +28,18 @@ function ManageCollections({ userData }) {
   });
 
   const fetchData = async () => {
-    await axios.get("http://localhost:8000/collections").then((res) => {
-      setData(res.data);
-    });
+    await axios
+      .get("https://course-project-rgk2.vercel.app/collections")
+      .then((res) => {
+        setData(res.data);
+      });
   };
   useEffect(() => {
     fetchData();
   }, [fetching]);
   const handleDeleteCollections = async (id) => {
     try {
-      const url = `http://localhost:8000/collections/delete/${id}`;
+      const url = `https://course-project-rgk2.vercel.app/collections/delete/${id}`;
       const res = await axios.delete(url);
       if (res.status === 200 || res.status === 201) {
         fetchData();
@@ -51,7 +53,7 @@ function ManageCollections({ userData }) {
     e.preventDefault();
     console.log(update);
     try {
-      const url = `http://localhost:8000/collections/edit/${update.id}`;
+      const url = `https://course-project-rgk2.vercel.app/collections/edit/${update.id}`;
       const res = await axios.patch(url, update);
       if (res.status === 200 || res.status === 201) {
         setUpdate({ id: "" });
